@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+  {% block body %}
+      vous etes:
+      {% if is_granted('ROLE_ADMIN')  %}
+          <p>admin</p>
+      {% endif %}
+  {% if is_granted('ROLE_USER')  %}
+  <p>client</p>
+
+{% endif %}
+      {{ dump(app) }}
+      Vous information
+      {{ app.user.id }}
+      {{ app.user.username }}
+  {% endblock %}

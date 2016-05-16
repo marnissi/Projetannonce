@@ -1,0 +1,10 @@
+annonce_categorie:
+    resource: "@AnnonceBundle/Resources/config/routing/categorie.yml"
+    prefix:   /categorie
+annonce_detailannonce:
+    resource: "@AnnonceBundle/Resources/config/routing/detailannonce.yml"
+    prefix:   /detailannonce
+
+annonce_homepage:
+    path:     /
+    defaults: { _controller: AnnonceBundle:Default:index }

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="replay-box">
+        {{ form_start(form,{'attr':{'novalidate':'novalidate','autocomplete':'on'}}) }}
+        <div class="row">
+            <h2>Annonce</h2>
+                <div class="col-sm-6">
+                    <div class="blank-arrow">
+                    <label for="{{ form.categorie.vars.id }}">Categorie</label>
+                    </div>
+                    {{ form_widget(form.categorie)  }}
+                    {% do form.categorie.setRendered %}
+                    <div class="blank-arrow">
+                        <label for="{{ form.titre.vars.id }}">Titre</label>
+                    </div>
+                    <span>*</span>
+                    {{ form_widget(form.titre,{'attr':{'placeholder':'entrer titre annonce'}})  }}
+                    {% do form.titre.setRendered %}
+                    <div class="blank-arrow">
+                        <label for="{{ form.entreprise.vars.id }}">Entreprise</label>
+                    </div>
+                    <span>*</span>
+                    {{ form_widget(form.entreprise,{'attr':{'placeholder':'entre nom entreprise'}})  }}
+                    {% do form.entreprise.setRendered %}
+                    <div class="blank-arrow">
+                        <label for="{{ form.adresseEntrprise.vars.id }}">Adresse entrprise</label>
+                    </div>
+                    {{ form_widget(form.adresseEntrprise,{'attr':{'placeholder':'entre adresse entreprise'}})  }}
+                    {% do form.adresseEntrprise.setRendered %}
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="blank-arrow">
+                        <label for="{{ form.souscategorie.vars.id }}">SousCategorie</label>
+                    </div>
+                    {{ form_widget(form.souscategorie)  }}
+                    {% do form.souscategorie.setRendered %}
+                    <div class="blank-arrow">
+                        <label  for="{{ form.experience.vars.id}}" }}>experience</label>
+                    </div>
+                    <span>*</span>
+                    {{ form_widget(form.experience,{'attr':{'placeholder':'entre experience'}})  }}
+                    {% do form.experience.setRendered %}
+                    <div class="blank-arrow">
+                        <label for="{{ form.status.vars.id}}">Status</label>
+                    </div>
+                    <span>*</span>
+                    {{ form_widget(form.status,{'attr':{'placeholder':'entre satus'}})  }}
+                    {% do form.status.setRendered %}
+                    <div class="blank-arrow">
+                        <label for="{{ form.phone.vars.id}}">Phone</label>
+                    </div>
+                    {{ form_widget(form.phone,{'attr':{'placeholder':'entre phone'}})  }}
+                    {% do form.phone.setRendered %}
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="text-area">
+                <div class="blank-arrow">
+                    <label for="{{ form.description.vars.id}}">Description</label>
+                </div>
+                <span>*</span>
+                <textarea
+                        id="{{ form.description.vars.id }}"
+                        name="{{ form.description.vars.full_name }}"
+                        value="{{ form.description.vars.value }}"
+                       rows="11"></textarea>
+                {% do form.description.setRendered %}
+                <input class="btn btn-primary" type="submit" value="Entrer">
+            </div>
+        </div>
+    </div>
+        {{ form_end(form) }}
+    </div><!--/Repaly Box-->
+
+
+{% endblock %}

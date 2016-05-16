@@ -4,6 +4,12 @@ parameters:
 #    parameter_name: value
 
 services:
+     app_user.registration_listener:
+        class: Utilisateurs\UtilisateursBundle\EventListener\RegistrationListener
+        arguments: []
+        tags:
+             - { name: kernel.event_subscriber }
+
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+{% macro souscategoriesCollectionItem(formData) %}
+    <div class="form-group">
+        <div class="col-md-5" style="padding:3px;">
+            <input type="text" class="form-control" id="{{ formData.nom.vars.id }}"
+                   name="{{ formData.nom.vars.full_name }}"
+                   value="{{ formData.nom.vars.value }}"
+                   placeholder="Entrer nom sous categorie">
+            {% do formData.nom.setRendered %}
+            {% if not formData.nom.vars.valid %}
+                {% for error in formData.nom.vars.errors %}
+                    <div class="alert alert-info" role="alert">
+                        {{ error.message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+        <div class="col-md-5" style="padding:3px;">
+
+            <input type="text" class="form-control" id="{{ formData.description.vars.id }}"
+                   name="{{ formData.description.vars.full_name }}"
+                   value="{{ formData.nom.vars.value }}"
+                   placeholder="Entrer description">
+            {% do formData.description.setRendered %}
+            {% if not formData.description.vars.valid %}
+                {% for error in formData.description.vars.errors %}
+                    <div class="alert alert-info" role="alert">
+                        {{ error.message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+   {% block body %}
+       <div class="replay-box">
+           {{ form_start(form,{'attr':{'novalidate':'novalidate','autocomplete':'on'}}) }}
+           {% set class="" %}
+           {% if not form.nom.vars.valid %}
+               {% set class="has-error" %}
+           {% endif %}
+           <div class="row">
+               <div class="col-md-6">
+                   <div class="form-group {{ class }}">
+                       {{ form_label(form.nom,"Nom") }}
+                       {{ form_widget(form.nom,{'attr':{'placeholder':'Nom Categorie'}}) }}
+                       {% do form.nom.setRendered %}
+                       {% if not form.nom.vars.valid %}
+                           {% for error in form.nom.vars.errors %}
+                               <span class="help-block"> *{{ error.message }}</span>
+                           {% endfor %}
+                       {% endif %}
+                   </div>
+               </div>
+
+               <div class="col-md-6">
+                   <div class="form-group">
+                       {{ form_label(form.description,"Description") }}
+                       {{ form_widget(form.description,{'attr':{'placeholder':'Description Categorie'}}) }}
+                   </div>
+               </div>
+           </div>
+
+           <a href="#" id="add_sous_categorie" class="btn btn-default">Ajouter sous categorie</a>
+           <div class="row">
+               <ul class="souscategories"
+                   data-prototype="{{ _self.souscategoriesCollectionItem(form.souscategories.vars.prototype)|e }}">
+                   {% for souscategorie in form.souscategories %}
+                       {{ _self.souscategoriesCollectionItem(souscategorie) }}
+                   {% endfor %}
+                   {% do form.souscategories.setRendered %}
+               </ul>
+           </div>
+
+           <input class="btn btn-primary pull-right" type="submit" value="Create"/>
+           {{ form_end(form) }}
+       </div><!--/Repaly Box-->
+       <ul>
+           <li>
+               <a href="{{ path('categorie_index') }}">Back to the list</a>
+           </li>
+       </ul>
+
+   {% endblock %}
+
+
+
+
+
+{% block javascripts %}
+
+    {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+    {# Le formulaire reste inchangé #}
+    <div class="well">
+        {{ form(form) }}
+    </div>
+
+    {# Voici le script en question : #}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('ul.souscategories');
+
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $('#add_sous_categorie').click(function (e) {
+                addCategory($container);
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+            });
+
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = 0;
+
+
+            // La fonction qui ajoute un formulaire Categorie
+            function addCategory($container) {
+                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                // - le texte "__name__label__" qu'il contient par le label du champ
+                // - le texte "__name__" qu'il contient par le numéro du champ
+                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Catégorie n°' + (index + 1))
+                        .replace(/__name__/g, index));
+
+                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                addDeleteLink($prototype);
+
+                // On ajoute le prototype modifié à la fin de la balise <div>
+                $container.append($prototype);
+
+                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+
+            // La fonction qui ajoute un lien de suppression d'une catégorie
+            function addDeleteLink($prototype) {
+                // Création du lien
+                $deleteLink = $('<div class="col-md-1"> <a href="#" class="btn btn-primary">Supprimer</a></div>');
+
+                // Ajout du lien
+                $prototype.append($deleteLink);
+
+                // Ajout du listener sur le clic du lien
+                $deleteLink.click(function (e) {
+                    $prototype.remove();
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
+

@@ -1,0 +1,28 @@
+categorie_index:
+    path:     /
+    defaults: { _controller: "AnnonceBundle:Categorie:index" }
+    methods:  GET
+
+categorie_show:
+    path:     /{id}/show
+    defaults: { _controller: "AnnonceBundle:Categorie:show" }
+    methods:  GET
+
+categorie_new:
+    path:     /new
+    defaults: { _controller: "AnnonceBundle:Categorie:new" }
+    methods:  [GET, POST]
+
+categorie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AnnonceBundle:Categorie:edit" }
+    methods:  [GET, POST]
+
+categorie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AnnonceBundle:Categorie:delete" }
+    methods:  DELETE
+categorieProduits:
+    path:     /categorie/{categorie}
+    defaults: { _controller: "AnnonceBundle:Categorie:categorie" }
+    methods:  GET

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="features_items"><!--Les annonces-->
+        <h2 class="title text-center">Annonce N°{{ detailAnnonce.id }}</h2>
+        <div class="col-sm-4">
+        </div>
+    </div>
+
+    <div class="product-details"><!--product-details-->
+        <div class="col-sm-5">
+            <div class="view-product">
+                <img src="{{ asset('images/product-details/1.jpg') }}" alt="">
+                <h3>ZOOM</h3>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="product-information"><!--/product-information-->
+                <h2>{{ detailAnnonce.titre }}</h2>
+                <p>Web ID: {{ detailAnnonce.id }}</p>
+                <img src="{{ asset('images/product-details/rating.png') }}" alt=""/>
+                <p><b>Entreprise::</b>{{ detailAnnonce.entreprise }}</p>
+                <p><b>Adresse:</b>{{ detailAnnonce.adresseEntrprise }}</p>
+                <p><b>Experience:</b>{{ detailAnnonce.experience }}</p>
+                <p><b>Status:</b>{{ detailAnnonce.status }}</p>
+                <p><b>Phone:</b>{{ detailAnnonce.phone }}</p>
+                <p><b>Description:</b>{{ detailAnnonce.description }}</p>
+
+                <a href="{{ path('detailannonce_edit', { 'id': detailAnnonce.id }) }}">
+                    <button type="button" class="btn btn-fefault cart">
+                        <i class="fa fa-shopping-cart"></i>
+                        Edit
+                    </button>
+                </a>
+
+                <ul>
+                    <li>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                        {{ form_end(delete_form) }}
+                    </li>
+                </ul>
+            </div><!--/product-information-->
+        </div>
+    </div>
+
+{% endblock %}

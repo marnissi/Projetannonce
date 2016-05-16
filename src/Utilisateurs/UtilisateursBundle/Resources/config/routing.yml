@@ -1,0 +1,15 @@
+utilisateurs_homepage:
+    path:     /
+    defaults: { _controller: UtilisateursBundle:Default:index }
+admin_page:
+    path:     /admin/
+    defaults: { _controller: UtilisateursBundle:Default:adminPage }
+client_page:
+    path:     /client
+    defaults: { _controller: UtilisateursBundle:Default:clientPage }
+user_page:
+    path:     /user
+    defaults: { _controller: UtilisateursBundle:Default:showUser }
+determin_user_page:
+    path:     /who_is_user
+    defaults: { _controller: UtilisateursBundle:Default:determinUser }
