@@ -1,5 +1,5 @@
 utilisateurs_homepage:
-    path:     /
+    path:     /utilisateur
     defaults: { _controller: UtilisateursBundle:Default:index }
 admin_page:
     path:     /admin/

@@ -10,14 +10,5 @@ namespace Annonce\AnnonceBundle\Repository;
  */
 class DetailAnnonceRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function byCategorie($categorie)
-    {
-        $qb=$this->createQueryBuilder('d')
-            ->select('d')
-            ->where('d.$categorie = :$categorie')
-            ->orderBy('d.id')
-            ->setParameter('categorie',$categorie);
-            return $qb->getQuery()->getResult();
 
-    }
 }

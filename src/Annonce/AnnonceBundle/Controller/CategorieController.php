@@ -139,14 +139,5 @@ class CategorieController extends Controller
             'categories' => $categories,
         ));
     }
-    public function categorieAction($categorie)
-    {
-        $em = $this->getDoctrine()->getManager();
 
-        $annonces = $em->getRepository('AnnonceBundle:Categorie')->byCategorie($categorie);
-
-        return $this->render('AnnonceBundle:Categorie:menu.html.twig', array(
-            'annonces' => $annonces,
-        ));
-    }
 }

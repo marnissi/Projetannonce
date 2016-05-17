@@ -4,6 +4,7 @@ namespace Annonce\AnnonceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Annonce\AnnonceBundle\Entity\DetailAnnonce;
 use Annonce\AnnonceBundle\Form\DetailAnnonceType;
@@ -15,18 +16,28 @@ use Annonce\AnnonceBundle\Form\DetailAnnonceType;
 class DetailAnnonceController extends Controller
 {
     /**
-     * Lists all DetailAnnonce entities.
+     * @return \Symfony\Component\HttpFoundation\Response
      *
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
         $detailAnnonces = $em->getRepository('AnnonceBundle:DetailAnnonce')->findAll();
+        if($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return $this->render('AnnonceBundle:Administration:detailannonce/index.html.twig', array(
+                'detailAnnonces' => $detailAnnonces,
+            ));
+        }
+        if($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            return $this->render('AnnonceBundle:Detailannonce:index.html.twig', array(
+                'detailAnnonces' => $detailAnnonces,
+            ));
+        }
 
-        return $this->render('AnnonceBundle:DetailAnnonce:index.html.twig', array(
-            'detailAnnonces' => $detailAnnonces,
-        ));
+
+
     }
 
     /**
@@ -124,5 +135,33 @@ class DetailAnnonceController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    public function categorieAction($categorie)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $annonces = $em->getRepository('AnnonceBundle:DetailAnnonce')->findByCategorie($categorie);
+
+        return $this->render('AnnonceBundle:detailannonce:index.html.twig', array(
+            'detailAnnonces' => $annonces,
+        ));
+    }
+    /**
+     * Finds and displays a DetailAnnonce entity.
+     *
+     */
+    public function navbarAction()
+    {
+        return $this->render('AnnonceBundle:Default:navbar.html.twig'
+        );
+    }
+    /**
+     * Finds and displays a DetailAnnonce entity.
+     *
+     */
+    public function collapsenavbarAction()
+    {
+        return $this->render('AnnonceBundle:Default:collapsenavbar.html.twig'
+        );
     }
 }

@@ -22,7 +22,4 @@ categorie_delete:
     path:     /{id}/delete
     defaults: { _controller: "AnnonceBundle:Categorie:delete" }
     methods:  DELETE
-categorieProduits:
-    path:     /categorie/{categorie}
-    defaults: { _controller: "AnnonceBundle:Categorie:categorie" }
-    methods:  GET
+

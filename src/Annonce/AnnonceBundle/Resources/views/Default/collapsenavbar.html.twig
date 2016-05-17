@@ -1,0 +1,11 @@
+{% if is_granted('ROLE_ADMIN')  %}
+<li><a href="#" class="active">Home</a></li>
+<li class="dropdown"><a href="{{ path('categorie_new') }}">Annonce<i class="fa fa-angle-down"></i></a>
+</li>
+<li class="dropdown"><a href="{{ path('categorie_index') }}">Categorie</a></li>
+<li class="dropdown"><a href="#">Sous Categorie</a></li>
+{% else %}
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="{{ path('categorie_new') }}">Annonce</a></li>
+    <li><a href="contact-us.html">Contact</a></li>
+{% endif %}

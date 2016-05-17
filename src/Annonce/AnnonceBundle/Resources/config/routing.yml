@@ -3,8 +3,7 @@ annonce_categorie:
     prefix:   /categorie
 annonce_detailannonce:
     resource: "@AnnonceBundle/Resources/config/routing/detailannonce.yml"
-    prefix:   /detailannonce
+    prefix:   /
 
-annonce_homepage:
-    path:     /
-    defaults: { _controller: AnnonceBundle:Default:index }
+
+

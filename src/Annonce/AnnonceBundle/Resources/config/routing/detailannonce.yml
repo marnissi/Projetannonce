@@ -22,3 +22,11 @@ detailannonce_delete:
     path:     /{id}/delete
     defaults: { _controller: "AnnonceBundle:DetailAnnonce:delete" }
     methods:  DELETE
+categorieProduits:
+    path:     /{categorie}/categorie
+    defaults: { _controller: "AnnonceBundle:DetailAnnonce:categorie" }
+    methods:  GET
+categorieProduits:
+    path:     /
+    defaults: { _controller: "AnnonceBundle:DetailAnnonce:navbar" }
+    methods:  GET
